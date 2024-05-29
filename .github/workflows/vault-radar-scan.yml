@@ -33,7 +33,7 @@ jobs:
 
 
        # curl -L -o vault-radar "https://drive.google.com/uc?export=download&id=15bfUBIJJ2vGaoOc0gfjrXaWhjY0gTKv_"
-       curl -L -o vault-radar "https://drive.usercontent.google.com/u/0/uc?id=1g7Vg7DR8TDYDibcNli_3WVqB4-MUFYi2&export=download"
+       curl -L -o vault-radar "https://drive.usercontent.google.com/u/0/uc?id=1-TKN_tK99BAmiQjucG7ZHmcH-DoXYPM9&export=download"
 
 
        chmod +x vault-radar
