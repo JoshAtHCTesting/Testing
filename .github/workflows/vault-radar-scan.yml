@@ -1,0 +1,70 @@
+name: Vault Radar Scan
+
+
+env:
+ FETCH_DEPTH: 0
+
+
+on:
+ pull_request:
+   branches: [ main ]
+ push:
+   branches:
+     - "main"
+
+
+jobs:
+ vault-radar:
+   runs-on: ubuntu-latest
+
+
+   steps:
+   - name: Checkout code
+     uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
+     with:
+       fetch-depth: ${{ env.FETCH_DEPTH }}
+
+
+   - name: Run Vault Radar
+     env:
+       VAULT_RADAR_LICENSE: ${{ secrets.VAULT_RADAR_LICENSE }}   
+     run: |
+       set -x
+
+
+       # curl -L -o vault-radar "https://drive.google.com/uc?export=download&id=15bfUBIJJ2vGaoOc0gfjrXaWhjY0gTKv_"
+       curl -L -o vault-radar "https://drive.usercontent.google.com/u/0/uc?id=1g7Vg7DR8TDYDibcNli_3WVqB4-MUFYi2&export=download"
+
+
+       chmod +x vault-radar
+
+
+       if [[ "${{ github.event_name }}" == "pull_request" ]];
+       then
+         if [[ "${{ env.FETCH_DEPTH }}" == "0" ]];
+         then
+           head_ref="${{ github.event.pull_request.head.sha }}" 
+           base_ref="${{ github.event.pull_request.base.sha }}"
+           ref_name="${{ github.head_ref }}"
+         fi
+         ./vault-radar scan ci pr \
+           --head-ref ${head_ref} \
+           --base-ref ${base_ref} \
+           --ref-name ${ref_name} \
+           -s high \
+           -o vault-radar.jsonl \
+           -l vault-radar.log \
+           --skip-ignored \
+           --pretty=gha_pr \
+           --summary-pretty markdown \
+           --summary-outfile $GITHUB_STEP_SUMMARY
+       else
+         ./vault-radar scan ci tip -s high -o vault-radar.jsonl -l vault-radar.log --pretty=gha --summary-pretty markdown --summary-outfile $GITHUB_STEP_SUMMARY
+       fi
+
+
+   - name: debugging
+     if:  failure()
+     run: |
+       cat vault-radar.log
+       cat vault-radar.jsonl
