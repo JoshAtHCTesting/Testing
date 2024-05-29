@@ -55,11 +55,9 @@ jobs:
            -o vault-radar.jsonl \
            -l vault-radar.log \
            --skip-ignored \
-           --pretty=gha_pr \
-           --summary-pretty markdown \
-           --summary-outfile $GITHUB_STEP_SUMMARY
+           --pretty=gha_pr
        else
-         ./vault-radar scan ci tip -s high -o vault-radar.jsonl -l vault-radar.log --pretty=gha --summary-pretty markdown --summary-outfile $GITHUB_STEP_SUMMARY
+         ./vault-radar scan ci tip -s high -o vault-radar.jsonl -l vault-radar.log --pretty=gha
        fi
 
 
