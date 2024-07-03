@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Get version
         id: vars
-        run: echo "$(cat version/VERSION)" >> $VERSION
+        run: echo "VERSION=$(cat version/VERSION)" >> $GITHUB_OUTPUT
       - name: Promote
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
