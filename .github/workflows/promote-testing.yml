@@ -1,0 +1,26 @@
+name: Promotion Testing
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch'
+        required: true
+        type: choice
+        default: main
+        options:
+          - main
+          - pre-release
+
+jobs:
+  staging:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Promote
+        env:
+          BOB_GITHUB_TOKEN: ${{ secrets.BOB_GITHUB_TOKEN }}
+          VERSION: ${{ github.event.inputs.version }}
+          SHA: ${{ github.event.inputs.sha }}
+          BRANCH: ${{ github.event.inputs.branch }}
+        run: |
+          echo ${{github}}
