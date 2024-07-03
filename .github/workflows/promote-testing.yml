@@ -7,6 +7,7 @@ jobs:
   staging:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Get version
         id: vars
         run: echo "VERSION=$(cat version/VERSION)" >> $GITHUB_OUTPUT
