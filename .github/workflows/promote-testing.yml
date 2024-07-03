@@ -10,5 +10,6 @@ jobs:
       - name: Promote
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
+          VERSION: ${{ cat version/VERSION }}
         run: |
           echo "$GITHUB_CONTEXT"
