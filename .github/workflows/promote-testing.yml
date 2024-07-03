@@ -7,6 +7,9 @@ jobs:
   staging:
     runs-on: ubuntu-latest
     steps:
+      - name: Get version
+        id: vars
+        run: echo "$(cat version/VERSION)" >> $VERSION
       - name: Promote
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
