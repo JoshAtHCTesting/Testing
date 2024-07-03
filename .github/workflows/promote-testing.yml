@@ -13,6 +13,7 @@ jobs:
       - name: Promote
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
+          VERSION: ${{ steps.vars.outputs.version }}
         run: |
           echo "$GITHUB_CONTEXT"
           echo "$VERSION"
