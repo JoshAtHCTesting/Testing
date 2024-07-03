@@ -13,3 +13,4 @@ jobs:
           VERSION: ${{ cat version/VERSION }}
         run: |
           echo "$GITHUB_CONTEXT"
+          echo "$VERSION"
