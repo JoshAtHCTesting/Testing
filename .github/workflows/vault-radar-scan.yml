@@ -27,14 +27,17 @@ jobs:
 
    - name: Run Vault Radar
      env:
-       VAULT_RADAR_LICENSE: ${{ secrets.VAULT_RADAR_LICENSE }}   
+       VAULT_RADAR_LICENSE: ${{ secrets.VAULT_RADAR_LICENSE }}
+       HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
+       HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
+       HCP_PROJECT_ID: ${{ secrets.HCP_PROJECT_ID }}
      run: |
        set -x
 
 
-       # curl -L -o vault-radar "https://drive.google.com/uc?export=download&id=15bfUBIJJ2vGaoOc0gfjrXaWhjY0gTKv_"
-       curl -L -o vault-radar "https://drive.usercontent.google.com/u/0/uc?id=1-TKN_tK99BAmiQjucG7ZHmcH-DoXYPM9&export=download"
-
+       curl https://releases.hashicorp.com/vault-radar/0.11.0/vault-radar_0.11.0_linux_amd64.zip -o vault-radar_0.11.0.zip
+       unzip vault-radar_0.11.0.zip -d vault-radar_0.11.0
+       mv vault-radar_0.11.0/vault-radar .
 
        chmod +x vault-radar
 
