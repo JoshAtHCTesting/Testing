@@ -16,7 +16,7 @@ jobs:
           BRANCH: ${{ github.ref_name }}
           VERSION: ${{ steps.vars.outputs.version }}
           EXPECTED: ${{ format('{0}{1}', 'release/v', steps.vars.outputs.version) }}
-        if: ${{ $BRANCH != $EXPECTED }}
+        if: ${{ env.BRANCH != env.EXPECTED }}
         run: |
             echo Improper branch name: $BRANCH
             echo Expected branch name: $EXPECTED
