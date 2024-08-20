@@ -14,9 +14,9 @@ jobs:
       - name: Validate Branch Name
         env:
           branch: ${{ github.ref_name }}
-          expected: ${{ "releases/v" + steps.vars.outputs.version }}
           VERSION: ${{ steps.vars.outputs.version }}
         run: |
+          expected="$(echo -n "releases/v${VERSION}")"
           if ["$branch" != "$expected"]; then
             echo Improper branch name: $branch
             echo Expected branch name: $expectedBranchName
