@@ -4,6 +4,22 @@ on:
   workflow_dispatch:
 
 jobs:
+  check-user:
+    name: Validate Team
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check user permissions
+        uses: tspascoal/get-user-teams-membership@v2
+        id: teamAffiliation
+        with:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          username: ${{ github.actor }}
+          team: empty-team
+      - name: Abort workflow
+        if: ${{ steps.teamAffiliation.outputs.isTeamMember == false }}
+        run: |
+          echo "You do not have permission to run this workflow. Only members of the GitHub team <TODO> may run this workflow."
+          exit 1
   staging:
     runs-on: ubuntu-latest
     steps:
@@ -11,6 +27,8 @@ jobs:
       - name: Get version
         id: vars
         run: echo "VERSION=$(cat version/VERSION)" >> $GITHUB_OUTPUT
+      - name: Validate User is in Group
+      
       - name: Validate Branch Name
         env:
           BRANCH: ${{ github.ref_name }}
