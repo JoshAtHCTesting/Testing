@@ -23,7 +23,7 @@ jobs:
           echo $output
           echo $teams
       - name: Abort workflow
-        if: ${{ steps.teamAffiliation.outputs.isTeamMember == 'false' }}
+        if: ${{ steps.teamAffiliation1.outputs.isTeamMember == 'false' }}
         run: |
           echo "You do not have permission to run this workflow. Only members of the GitHub team Team Team may run this workflow."
           exit 1
@@ -42,7 +42,7 @@ jobs:
           echo $output
           echo $teams
       - name: Abort workflow
-        if: ${{ steps.teamAffiliation.outputs.isTeamMember == 'false' }}
+        if: ${{ steps.teamAffiliation2.outputs.isTeamMember == 'false' }}
         run: |
           echo "You do not have permission to run this workflow. Only members of the GitHub team Empty Team may run this workflow."
           exit 1
