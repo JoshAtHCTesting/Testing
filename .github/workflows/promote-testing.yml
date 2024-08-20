@@ -15,7 +15,7 @@ jobs:
         env:
           branchName: ${{ github.ref_name }}
         run: |
-          expectedBranchName = "releases/v" + $VERSION
+          expectedBranchName="releases/v" + $VERSION
           if ["$expectedBranchName" != "$branchName"]; then
             echo "Improper branch name: " + $branchName
             echo "Expected branch name: releases/v" + $VERSION
