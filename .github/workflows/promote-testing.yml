@@ -15,6 +15,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           username: ${{ github.actor }}
           team: empty-team
+      - name: Debug Output
+        env:
+          output: ${{ steps.teamAffiliation.outputs.isTeamMember }}
+        run: echo $output
       - name: Abort workflow
         if: ${{ steps.teamAffiliation.outputs.isTeamMember == false }}
         run: |
