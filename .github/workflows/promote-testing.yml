@@ -17,8 +17,8 @@ jobs:
           team: Team Team
       - name: Debug Output
         env:
-          output: ${{ steps.teamAffiliation.outputs.isTeamMember }}
-          teams: ${{ steps.teamAffiliation.outputs.teams }}
+          output: ${{ steps.teamAffiliation1.outputs.isTeamMember }}
+          teams: ${{ steps.teamAffiliation1.outputs.teams }}
         run: |
           echo $output
           echo $teams
@@ -36,8 +36,8 @@ jobs:
           team: Empty Team
       - name: Debug Output
         env:
-          output: ${{ steps.teamAffiliation.outputs.isTeamMember }}
-          teams: ${{ steps.teamAffiliation.outputs.teams }}
+          output: ${{ steps.teamAffiliation2.outputs.isTeamMember }}
+          teams: ${{ steps.teamAffiliation2.outputs.teams }}
         run: |
           echo $output
           echo $teams
