@@ -18,7 +18,10 @@ jobs:
       - name: Debug Output
         env:
           output: ${{ steps.teamAffiliation.outputs.isTeamMember }}
-        run: echo $output
+          teams: ${{ steps.teamAffiliation.outputs.teams }}
+        run: |
+          echo $output
+          echo $teams
       - name: Abort workflow
         if: ${{ steps.teamAffiliation.outputs.isTeamMember == 'false' }}
         run: |
