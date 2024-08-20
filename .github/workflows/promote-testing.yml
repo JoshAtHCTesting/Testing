@@ -16,7 +16,7 @@ jobs:
           branch: ${{ github.ref_name }}
           VERSION: ${{ steps.vars.outputs.version }}
         run: |
-          EXPECTED=releases/v$VERSION
+          EXPECTED="releases/v$VERSION"
           if ["$branch" != "$EXPECTED"]; then
             echo Improper branch name: $branch
             echo Expected branch name: $EXPECTED
