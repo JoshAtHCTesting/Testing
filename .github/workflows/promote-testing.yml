@@ -20,7 +20,7 @@ jobs:
           output: ${{ steps.teamAffiliation.outputs.isTeamMember }}
         run: echo $output
       - name: Abort workflow
-        if: ${{ steps.teamAffiliation.outputs.isTeamMember == false }}
+        if: ${{ steps.teamAffiliation.outputs.isTeamMember == 'false' }}
         run: |
           echo "You do not have permission to run this workflow. Only members of the GitHub team <TODO> may run this workflow."
           exit 1
