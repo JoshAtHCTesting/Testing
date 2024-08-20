@@ -13,12 +13,12 @@ jobs:
         run: echo "VERSION=$(cat version/VERSION)" >> $GITHUB_OUTPUT
       - name: Validate Branch Name
         env:
-          branchName: ${{ github.ref_name }}
+          branch: ${{ github.ref_name }}
+          expected: ${{ releases/v + steps.vars.outputs.version }}
           VERSION: ${{ steps.vars.outputs.version }}
         run: |
-          expectedBranchName="$(echo -n releases/v$VERSION)"
-          if ["$expectedBranchName" != "$branchName"]; then
-            echo "Improper branch name: " + $branchName
+          if ["$branch" != "$expected"]; then
+            echo Improper branch name: $branch
             echo Expected branch name: $expectedBranchName
             exit 1
           fi
