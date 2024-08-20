@@ -14,6 +14,7 @@ jobs:
       - name: Validate Branch Name
         env:
           branchName: ${{ github.ref_name }}
+          VERSION: ${{ steps.vars.outputs.version }}
         run: |
           expectedBranchName="$(echo releases/v$VERSION)"
           if ["$expectedBranchName" != "$branchName"]; then
