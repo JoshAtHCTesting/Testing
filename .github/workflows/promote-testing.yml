@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Check user permissions
         uses: tspascoal/get-user-teams-membership@v2
-        id: teamAffiliation
+        id: teamAffiliation1
         with:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           username: ${{ github.actor }}
@@ -29,7 +29,7 @@ jobs:
           exit 1
       - name: Check user permissions 2
         uses: tspascoal/get-user-teams-membership@v2
-        id: teamAffiliation 2
+        id: teamAffiliation2
         with:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           username: ${{ github.actor }}
