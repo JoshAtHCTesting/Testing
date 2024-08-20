@@ -11,6 +11,15 @@ jobs:
       - name: Get version
         id: vars
         run: echo "VERSION=$(cat version/VERSION)" >> $GITHUB_OUTPUT
+      - name: Validate Branch Name
+        env:
+          branchName: ${{ github.ref_name }}
+        run: |
+          if ["release/v" + $VERSION != $branchName]; then
+            echo "Improper branch name: " + $branchName
+            echo "Expected branch name: releases/v" + $VERSION
+            exit 1
+          fi
       - name: Promote
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
