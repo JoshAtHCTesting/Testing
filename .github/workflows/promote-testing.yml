@@ -25,10 +25,30 @@ jobs:
       - name: Abort workflow
         if: ${{ steps.teamAffiliation.outputs.isTeamMember == 'false' }}
         run: |
-          echo "You do not have permission to run this workflow. Only members of the GitHub team <TODO> may run this workflow."
+          echo "You do not have permission to run this workflow. Only members of the GitHub team Team Team may run this workflow."
+          exit 1
+      - name: Check user permissions 2
+        uses: tspascoal/get-user-teams-membership@v2
+        id: teamAffiliation 2
+        with:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          username: ${{ github.actor }}
+          team: Empty Team
+      - name: Debug Output
+        env:
+          output: ${{ steps.teamAffiliation.outputs.isTeamMember }}
+          teams: ${{ steps.teamAffiliation.outputs.teams }}
+        run: |
+          echo $output
+          echo $teams
+      - name: Abort workflow
+        if: ${{ steps.teamAffiliation.outputs.isTeamMember == 'false' }}
+        run: |
+          echo "You do not have permission to run this workflow. Only members of the GitHub team Empty Team may run this workflow."
           exit 1
   staging:
     runs-on: ubuntu-latest
+    needs: check-user
     steps:
       - uses: actions/checkout@v3
       - name: Get version
