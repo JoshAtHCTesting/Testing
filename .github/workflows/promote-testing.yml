@@ -14,7 +14,7 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           username: ${{ github.actor }}
-          team: empty-team
+          team: team-team
       - name: Debug Output
         env:
           output: ${{ steps.teamAffiliation.outputs.isTeamMember }}
