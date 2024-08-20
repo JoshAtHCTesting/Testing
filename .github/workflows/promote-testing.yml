@@ -16,14 +16,11 @@ jobs:
           BRANCH: ${{ github.ref_name }}
           VERSION: ${{ steps.vars.outputs.version }}
           EXPECTED: ${{ format('{0}{1}', 'release/v', steps.vars.outputs.version) }}
+        if: ${{ $BRANCH != $EXPECTED }}
         run: |
-          echo $BRANCH
-          echo $EXPECTED
-          if ["$BRANCH" != "$EXPECTED"]; then
             echo Improper branch name: $BRANCH
             echo Expected branch name: $EXPECTED
             exit 1
-          fi
       - name: Promote
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
