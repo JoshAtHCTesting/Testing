@@ -1,0 +1,5 @@
+// Do stuff
+
+my-password = fetchFromSecretManager()
+
+// Do more stuff
