@@ -1,5 +1,5 @@
 // Do stuff
 
-my-password = jbg7QVQ0qhc5mwm*ava
+my-password = fetchFromSecretManager()
 
 // Do more stuff
