@@ -54,13 +54,13 @@ jobs:
            --head-ref ${head_ref} \
            --base-ref ${base_ref} \
            --ref-name ${ref_name} \
-           -s high \
+           -s medium \
            -o vault-radar.jsonl \
            -l vault-radar.log \
            --skip-ignored \
            --pretty=gha_pr
        else
-         ./vault-radar scan ci tip -s high -o vault-radar.jsonl -l vault-radar.log --pretty=gha
+         ./vault-radar scan ci tip -s medium -o vault-radar.jsonl -l vault-radar.log --pretty=gha
        fi
 
 
